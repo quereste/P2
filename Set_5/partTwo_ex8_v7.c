@@ -4,7 +4,7 @@ int main(int argc, char* argv[]) {
 	FILE* x;
 	char ware [100];
 	char name [16];
-	if (argc != 2) {
+	if (argc != 3) {
 		printf("default\n");
 		x = fopen("input.txt", "r");
 	} else {
@@ -37,7 +37,11 @@ int main(int argc, char* argv[]) {
 		fscanf(x, "%s", ware);
 	}
 	fclose(x);
-	x = fopen("statistics.dat", "w");
+	if (argc != 3) {
+		x = fopen("statistics.dat", "w");
+	} else {
+		x = fopen(argv[2], "w");
+	}
 	fprintf(x, "avg: %.2f\nmin: %d\nmax: %d\n", sum * 1.0 / number, min, max);
 	fclose(x);
 	return 0;
